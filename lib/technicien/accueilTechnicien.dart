@@ -271,10 +271,6 @@ class _AccueilTechnicienState extends State<AccueilTechnicien>
             icon: Icon(Icons.calendar_today),
             label: 'LCS',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Messagerie',
-          ),
         ],
       ),
     );
