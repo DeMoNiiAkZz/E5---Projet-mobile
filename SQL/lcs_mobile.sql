@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 17 avr. 2024 à 07:55
+-- Généré le : mer. 17 avr. 2024 à 09:01
 -- Version du serveur : 11.2.2-MariaDB
 -- Version de PHP : 8.2.13
 
@@ -374,10 +374,10 @@ CREATE TABLE IF NOT EXISTS `intervention` (
 --
 
 INSERT INTO `intervention` (`id_intervention`, `type`, `date_intervention`, `statut`, `duree_intervention`, `description`, `categorie`, `id_client`) VALUES
-(53, 'intervention', '2024-04-15 08:00:00', 'En cours', '01:30:00', 'Intervention de maintenance préventive', 'Fibre optique', 12),
+(53, 'intervention', '2024-04-15 08:00:00', 'Validée', '01:30:00', 'Intervention de maintenance préventive', 'Fibre optique', 12),
 (54, 'intervention', '2024-04-15 10:00:00', 'Terminée', '02:00:00', 'Installation de nouveaux équipements', 'Electricité', 15),
-(55, 'intervention', '2024-04-15 13:00:00', 'Validée', '01:00:00', 'Vérification de la borne de recharge existante', 'Borne de recharge', 12),
-(56, 'intervention', '2024-04-15 16:00:00', 'Refusée', '00:30:00', 'Maintenance corrective sur le système solaire', 'Energie solaire', 15);
+(55, 'intervention', '2024-04-15 13:00:00', 'A faire', '01:00:00', 'Vérification de la borne de recharge existante', 'Borne de recharge', 12),
+(56, 'intervention', '2024-04-15 16:00:00', 'Reportée', '00:30:00', 'Maintenance corrective sur le système solaire', 'Energie solaire', 15);
 
 --
 -- Déclencheurs `intervention`
@@ -471,7 +471,7 @@ INSERT INTO `intervention_technicien` (`id_intervention_technicien`, `id_interve
 (53, 53, 9),
 (54, 54, 9),
 (55, 55, 9),
-(56, 55, 9);
+(56, 56, 9);
 
 -- --------------------------------------------------------
 
@@ -487,7 +487,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `id_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_log`),
   KEY `fk_log_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `log`
@@ -565,7 +565,8 @@ INSERT INTO `log` (`id_log`, `message`, `dateheure`, `id_utilisateur`) VALUES
 (69, 'Démarrage intervention', '2024-04-04 22:13:37', 9),
 (70, 'Photos enregistrés', '2024-04-04 22:13:48', 9),
 (71, 'Report intervention', '2024-04-04 22:14:00', 9),
-(72, 'Connexion réussie', '2024-04-15 10:27:56', 9);
+(72, 'Connexion réussie', '2024-04-15 10:27:56', 9),
+(73, 'Connexion réussie', '2024-04-17 10:45:18', 9);
 
 -- --------------------------------------------------------
 
