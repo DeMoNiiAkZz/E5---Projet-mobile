@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 17 avr. 2024 à 09:01
+-- Généré le : mer. 17 avr. 2024 à 11:00
 -- Version du serveur : 11.2.2-MariaDB
 -- Version de PHP : 8.2.13
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `citations` (
   `id_citation` int(11) NOT NULL AUTO_INCREMENT,
   `citation` text NOT NULL,
   PRIMARY KEY (`id_citation`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `citations`
@@ -70,27 +70,6 @@ INSERT INTO `citations` (`id_citation`, `citation`) VALUES
 (2, 'Le bonheur n\'est pas quelque chose que l\'on trouve, c\'est quelque chose que l\'on crée.'),
 (3, 'Chaque jour est une nouvelle chance de changer votre vie.'),
 (4, 'Soyez le changement que vous voulez voir dans le monde.');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `commercial`
---
-
-DROP TABLE IF EXISTS `commercial`;
-CREATE TABLE IF NOT EXISTS `commercial` (
-  `id_commercial` int(11) NOT NULL AUTO_INCREMENT,
-  `validation` varchar(500) DEFAULT NULL,
-  `id_intervention` int(11) DEFAULT NULL,
-  `id_facture` int(11) DEFAULT NULL,
-  `id_devis` int(11) DEFAULT NULL,
-  `id_plan` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_commercial`),
-  KEY `fk_commercial_intervention` (`id_intervention`),
-  KEY `fk_commercial_facture` (`id_facture`),
-  KEY `fk_commercial_devis` (`id_devis`),
-  KEY `fk_commercial_plan` (`id_plan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -108,14 +87,16 @@ CREATE TABLE IF NOT EXISTS `communication` (
   `id_conversation` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_communication`),
   KEY `fk_communication_conversation` (`id_conversation`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `communication`
 --
 
 INSERT INTO `communication` (`id_communication`, `id_envoyeur`, `type_message`, `message`, `datetime`, `id_conversation`) VALUES
-(9, 25, 'Fichier', 'pieces_jointe/conversation/invoice_65e098d23ec07.pdf', '2024-02-29 15:46:42', 2);
+(9, 25, 'Fichier', 'pieces_jointe/conversation/invoice_65e098d23ec07.pdf', '2024-02-29 15:46:42', 2),
+(10, 25, 'Message', 'Salut', '2024-04-17 12:44:44', 2),
+(12, 25, 'Fichier', 'pieces_jointe/conversation/cc-d6-41-7e-ea-f0-f0-2c-e1-58-22-e2-61-45-ba-d4-12-dc-62-70_661fab1bf186a.jpg', '2024-04-17 12:57:31', 2);
 
 -- --------------------------------------------------------
 
@@ -142,14 +123,14 @@ CREATE TABLE IF NOT EXISTS `conges_payes` (
 
 INSERT INTO `conges_payes` (`id_conges_payes`, `motif`, `commentaire`, `date_debut`, `date_fin`, `id_technicien`, `traiter`) VALUES
 (1, 'Vacances', '', '2024-03-04', '2024-03-08', 9, 1),
-(2, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 0),
-(3, 'Vacances', '', '2024-03-18', '2024-03-22', 9, 0),
-(4, 'Vacances', '', '2024-03-04', '2024-03-08', 9, 0),
-(5, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 0),
-(6, 'Maladie', '', '2024-03-18', '2024-03-22', 9, 0),
-(7, 'Vacances', '', '2024-03-04', '2024-03-08', 9, 0),
-(8, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 0),
-(9, 'Maladie', '', '2024-03-18', '2024-03-22', 9, 0);
+(2, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 1),
+(3, 'Vacances', '', '2024-03-18', '2024-03-22', 9, 1),
+(4, 'Vacances', '', '2024-03-04', '2024-03-08', 9, 1),
+(5, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 1),
+(6, 'Maladie', '', '2024-03-18', '2024-03-22', 9, 1),
+(7, 'Vacances', '', '2024-03-04', '2024-03-08', 9, 1),
+(8, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 1),
+(9, 'Maladie', '', '2024-03-18', '2024-03-22', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -194,13 +175,6 @@ CREATE TABLE IF NOT EXISTS `cri` (
   KEY `id_intervention` (`id_intervention`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `cri`
---
-
-INSERT INTO `cri` (`id_cri`, `actions`, `equipements`, `problemes`, `observations`, `id_technicien`, `id_intervention`) VALUES
-(16, 'okok', 'okoko', 'okookko', 'kkkookok', 9, 50);
-
 -- --------------------------------------------------------
 
 --
@@ -217,13 +191,6 @@ CREATE TABLE IF NOT EXISTS `cri_validation` (
   KEY `id_cri` (`id_cri`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `cri_validation`
---
-
-INSERT INTO `cri_validation` (`id_validation_cri`, `validation`, `commentaire`, `id_cri`) VALUES
-(9, 'refuser', '', 16);
-
 -- --------------------------------------------------------
 
 --
@@ -237,11 +204,17 @@ CREATE TABLE IF NOT EXISTS `devis` (
   `chemin` varchar(255) DEFAULT NULL,
   `id_utilisateur` int(11) DEFAULT NULL,
   `id_intervention` int(11) DEFAULT NULL,
-  `valide` int(11) NOT NULL,
   PRIMARY KEY (`id_devis`),
   KEY `fk_devis_utilisateur` (`id_utilisateur`),
   KEY `id_intervention` (`id_intervention`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `devis`
+--
+
+INSERT INTO `devis` (`id_devis`, `nom`, `chemin`, `id_utilisateur`, `id_intervention`) VALUES
+(6, 'devis', 'pieces_jointe/devis/Capture d\'écran 2024-04-17 125427_661faab46d6ff.pdf', 25, 55);
 
 -- --------------------------------------------------------
 
@@ -288,7 +261,14 @@ CREATE TABLE IF NOT EXISTS `facture` (
   PRIMARY KEY (`id_facture`),
   KEY `fk_facture_utilisateur` (`id_utilisateur`),
   KEY `id_intervention` (`id_intervention`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `facture`
+--
+
+INSERT INTO `facture` (`id_facture`, `nom`, `chemin`, `id_utilisateur`, `id_intervention`) VALUES
+(5, 'Facture', 'pieces_jointe/facture/Capture d\'écran 2024-04-17 125427_661faaab60d45.pdf', 25, 55);
 
 -- --------------------------------------------------------
 
@@ -333,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `fichier` (
   KEY `fk_fichier_cri` (`id_cri`),
   KEY `fk_fichier_user` (`id_user`),
   KEY `id_stock` (`id_stock`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `fichier`
@@ -347,7 +327,7 @@ INSERT INTO `fichier` (`id_fichiers`, `chemin`, `nom_affichage`, `id_user`, `id_
 (13, 'pieces_jointe/technicien/pierre.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (14, 'pieces_jointe/technicien/paul.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (16, 'pieces_jointe/admin/admin.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(57, 'pieces_jointe/intervention/photoIntervention_51_660f09fc90354.jpg', NULL, 9, 51, NULL, NULL, NULL, NULL, NULL);
+(60, 'pieces_jointe/stock/cc-d6-41-7e-ea-f0-f0-2c-e1-58-22-e2-61-45-ba-d4-12-dc-62-70_661faae5e47b8.jpg', NULL, NULL, NULL, 25, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -367,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `intervention` (
   `id_client` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_intervention`),
   KEY `fk_intervention_utilisateur` (`id_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `intervention`
@@ -375,7 +355,7 @@ CREATE TABLE IF NOT EXISTS `intervention` (
 
 INSERT INTO `intervention` (`id_intervention`, `type`, `date_intervention`, `statut`, `duree_intervention`, `description`, `categorie`, `id_client`) VALUES
 (53, 'intervention', '2024-04-15 08:00:00', 'Validée', '01:30:00', 'Intervention de maintenance préventive', 'Fibre optique', 12),
-(54, 'intervention', '2024-04-15 10:00:00', 'Terminée', '02:00:00', 'Installation de nouveaux équipements', 'Electricité', 15),
+(54, 'intervention', '2024-04-15 10:00:00', 'En cours', '02:00:00', 'Installation de nouveaux équipements', 'Electricité', 15),
 (55, 'intervention', '2024-04-15 13:00:00', 'A faire', '01:00:00', 'Vérification de la borne de recharge existante', 'Borne de recharge', 12),
 (56, 'intervention', '2024-04-15 16:00:00', 'Reportée', '00:30:00', 'Maintenance corrective sur le système solaire', 'Energie solaire', 15);
 
@@ -461,7 +441,7 @@ CREATE TABLE IF NOT EXISTS `intervention_technicien` (
   PRIMARY KEY (`id_intervention_technicien`),
   KEY `fk_intervention_technicien_intervention` (`id_intervention`),
   KEY `fk_intervention_technicien_technicien` (`id_technicien`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `intervention_technicien`
@@ -471,7 +451,8 @@ INSERT INTO `intervention_technicien` (`id_intervention_technicien`, `id_interve
 (53, 53, 9),
 (54, 54, 9),
 (55, 55, 9),
-(56, 56, 9);
+(56, 56, 9),
+(59, 59, 9);
 
 -- --------------------------------------------------------
 
@@ -487,7 +468,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `id_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_log`),
   KEY `fk_log_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `log`
@@ -543,30 +524,7 @@ INSERT INTO `log` (`id_log`, `message`, `dateheure`, `id_utilisateur`) VALUES
 (47, 'Connexion réussie', '2024-03-01 10:41:10', 15),
 (48, 'Connexion réussie', '2024-03-01 10:51:28', 15),
 (49, 'Connexion réussie', '2024-03-01 10:52:51', 15),
-(50, 'Connexion réussie', '2024-03-01 11:00:24', 15),
-(51, 'Connexion réussie', '2024-03-01 11:03:31', 9),
-(52, 'Compte rendu intervention', '2024-03-01 11:03:55', 9),
-(53, 'Démarrage intervention', '2024-03-01 11:03:59', 9),
-(54, 'Photos enregistrés', '2024-03-01 11:04:43', 9),
-(55, 'Photos enregistrés', '2024-03-01 11:04:48', 9),
-(56, 'Photos enregistrés', '2024-03-01 11:04:52', 9),
-(57, 'Photos enregistrés', '2024-03-01 11:06:34', 9),
-(58, 'Connexion réussie', '2024-03-01 11:22:01', 9),
-(59, 'Signature du client enregistrée', '2024-03-01 11:22:15', 15),
-(60, 'Intervention terminée', '2024-03-01 11:22:27', 9),
-(61, 'Démarrage intervention', '2024-03-01 11:46:31', 9),
-(62, 'Intervention terminée', '2024-03-01 11:46:41', 9),
-(63, 'Compte rendu intervention', '2024-03-01 11:53:04', 9),
-(64, 'Démarrage intervention', '2024-03-01 11:54:57', 9),
-(65, 'Compte rendu intervention', '2024-03-01 11:55:10', 9),
-(66, 'Intervention terminée', '2024-03-01 11:55:18', 9),
-(67, 'Connexion réussie', '2024-03-01 13:45:37', 15),
-(68, 'Connexion réussie', '2024-04-04 22:13:34', 9),
-(69, 'Démarrage intervention', '2024-04-04 22:13:37', 9),
-(70, 'Photos enregistrés', '2024-04-04 22:13:48', 9),
-(71, 'Report intervention', '2024-04-04 22:14:00', 9),
-(72, 'Connexion réussie', '2024-04-15 10:27:56', 9),
-(73, 'Connexion réussie', '2024-04-17 10:45:18', 9);
+(50, 'Connexion réussie', '2024-03-01 11:00:24', 15);
 
 -- --------------------------------------------------------
 
@@ -603,7 +561,14 @@ CREATE TABLE IF NOT EXISTS `plan` (
   PRIMARY KEY (`id_plan`),
   KEY `fk_plan_utilisateur` (`id_utilisateur`),
   KEY `id_intervention` (`id_intervention`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `plan`
+--
+
+INSERT INTO `plan` (`id_plan`, `nom`, `chemin`, `id_utilisateur`, `id_intervention`) VALUES
+(13, 'documentation tech', 'pieces_jointe/plan/Capture d\'écran 2024-04-17 125427_661faabeebd9a.pdf', 25, 55);
 
 -- --------------------------------------------------------
 
@@ -668,15 +633,6 @@ CREATE TABLE IF NOT EXISTS `signalement` (
   KEY `id_technicien` (`id_technicien`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `signalement`
---
-
-INSERT INTO `signalement` (`id_signalement`, `motif`, `description`, `id_technicien`, `traiter`) VALUES
-(7, 'Panne', 'Voiture en panne je peux pu rien faire', 9, 0),
-(8, 'Client absent', 'Pas de client dispo', 9, 0),
-(9, 'Oublie', 'J&#039;ai oublié mon matériel de sécurité', 9, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -697,13 +653,6 @@ CREATE TABLE IF NOT EXISTS `signature` (
   KEY `id_client` (`id_client`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `signature`
---
-
-INSERT INTO `signature` (`id_signature`, `signature_client`, `signature_technicien`, `id_client`, `id_technicien`, `id_cri`) VALUES
-(50, 'pieces_jointe/signature/client_65e1ac57c60f8.png', NULL, 15, 9, 14);
-
 -- --------------------------------------------------------
 
 --
@@ -718,7 +667,14 @@ CREATE TABLE IF NOT EXISTS `stock` (
   `description` text NOT NULL,
   `quantite` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_stock`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `stock`
+--
+
+INSERT INTO `stock` (`id_stock`, `reference`, `nom`, `description`, `quantite`) VALUES
+(25, 'REF093895', 'Prise', 'Ceci est une prise de luxe', 100);
 
 -- --------------------------------------------------------
 
@@ -761,21 +717,20 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `telephone` varchar(255) DEFAULT NULL,
   `id_type` int(11) DEFAULT NULL,
   `id_fichier` int(11) DEFAULT NULL,
-  `token` varchar(255) NOT NULL,
-  `est_active` int(11) NOT NULL,
+  `est_active` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_utilisateur`),
   KEY `fk_utilisateur_type` (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id_utilisateur`, `nom`, `prenom`, `email`, `password`, `cp`, `ville`, `adresse`, `telephone`, `id_type`, `id_fichier`, `token`, `est_active`) VALUES
-(9, 'TECHNICIEN', 'Pierre', 'jesuistechnicien@gmail.com', '$2y$10$siwu2njAD0UZ0Ty4Tzkf4.D0tiQxL1.OkMm9wUlVFLK0xwr/GLo66', '55800', 'RSO', 'Ici dans ma rue', '0606060606', 2, 1, 'f50d7c7a7669d3e2d7c5aff68d237b9a942f15c08917104379bb802fee296c6b', 0),
-(12, 'Berger', 'Nathalie', 'jesuisclient2@gmail.com', '$2y$10$F5Iv34B2PXYCwR0I5zEJLeoMZ.FqpK3dolo12rp76YRhGjwL18qqW', '78000', 'Paris', '19 rue des rats', '0612345678', 3, NULL, '480e4114f849449c087d077fb12ab898b80c12d6e0b2dd9f197052c82c7daa7d', 0),
-(15, 'LAFOUR', 'Elodie', 'jesuisclient@gmail.com', '$2y$10$AkD56zPBRlAxNkU7.aUzT.7cfUCO5r2o8EVIwK7Ci4JdAU/Bi.J1K', '54000', 'Nancy', '90 rue du fourrier', '0678901234', 3, NULL, '4cece4f37f0e4598d1f79ef914df42b1e1ebe77a199b098450a1d520ea03e3a1', 0),
-(25, 'nom', 'prenom', 'jesuisadmin@gmail.com', '$2y$10$BzO88hLt5XOgv6aWz3/XjuyWvgd2OMoW8mP3uEwqm598xGnOlPSwK', 'cp', 'ville', 'adresse', '0612345678', 1, 16, '', 0);
+INSERT INTO `utilisateur` (`id_utilisateur`, `nom`, `prenom`, `email`, `password`, `cp`, `ville`, `adresse`, `telephone`, `id_type`, `id_fichier`, `est_active`) VALUES
+(9, 'TECHNICIEN', 'Pierre', 'jesuistechnicien@gmail.com', '$2y$10$siwu2njAD0UZ0Ty4Tzkf4.D0tiQxL1.OkMm9wUlVFLK0xwr/GLo66', '55800', 'RSO', 'Ici dans ma rue', '0606060606', 2, 1, 0),
+(12, 'Berger', 'Nathalie', 'jesuisclient2@gmail.com', '$2y$10$F5Iv34B2PXYCwR0I5zEJLeoMZ.FqpK3dolo12rp76YRhGjwL18qqW', '78000', 'Paris', '19 rue des rats', '0612345678', 3, NULL, 0),
+(15, 'LAFOUR', 'Elodie', 'jesuisclient@gmail.com', '$2y$10$AkD56zPBRlAxNkU7.aUzT.7cfUCO5r2o8EVIwK7Ci4JdAU/Bi.J1K', '54000', 'Nancy', '90 rue du fourrier', '0678901234', 3, NULL, 0),
+(25, 'nom', 'prenom', 'jesuisadmin@gmail.com', '$2y$10$BzO88hLt5XOgv6aWz3/XjuyWvgd2OMoW8mP3uEwqm598xGnOlPSwK', 'cp', 'ville', 'adresse', '0612345678', 1, 16, 0);
 
 -- --------------------------------------------------------
 
@@ -810,15 +765,6 @@ INSERT INTO `vehicule` (`id_vehicule`, `immatriculation`, `marque`, `modele`, `k
 --
 ALTER TABLE `avis`
   ADD CONSTRAINT `fk_avis_intervention` FOREIGN KEY (`id_intervention`) REFERENCES `intervention` (`id_intervention`);
-
---
--- Contraintes pour la table `commercial`
---
-ALTER TABLE `commercial`
-  ADD CONSTRAINT `fk_commercial_devis` FOREIGN KEY (`id_devis`) REFERENCES `devis` (`id_devis`),
-  ADD CONSTRAINT `fk_commercial_facture` FOREIGN KEY (`id_facture`) REFERENCES `facture` (`id_facture`),
-  ADD CONSTRAINT `fk_commercial_intervention` FOREIGN KEY (`id_intervention`) REFERENCES `intervention` (`id_intervention`),
-  ADD CONSTRAINT `fk_commercial_plan` FOREIGN KEY (`id_plan`) REFERENCES `plan` (`id_plan`);
 
 --
 -- Contraintes pour la table `communication`
