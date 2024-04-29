@@ -6,8 +6,8 @@
 
 ## Ce projet est réalise avec la technologie Flutter qui permet à partir d'un seul code de faire une application mobile Android et iOS qui communique avec un API PHP
 
-Projet mobile : https://github.com/DeMoNiiAkZz/E5---Projet-mobile
-Projet WEB (en lien à l'appli mobile obligatoire) : https://github.com/DeMoNiiAkZz/E5---Projet-web
+- Projet mobile : https://github.com/DeMoNiiAkZz/E5---Projet-mobile
+- Projet WEB (en lien à l'appli mobile obligatoire) : https://github.com/DeMoNiiAkZz/E5---Projet-web
 
 ---
 
