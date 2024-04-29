@@ -45,7 +45,7 @@
 - Dans ce fichier si vous voyez au dessus du main() écrit **"RUN | DEBUG | PROFILE"** c'est bon signe
   <img width="308" alt="voidmain" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/fd89cc77-14b2-46ac-b3b4-4329a50ea1b1">
 
-- Cliquer en **bas à droite** pour lancer l'appareil anddroid que vous souhaitez lancer le projet
+- Cliquer en **bas à droite** pour lancer l'appareil android que vous souhaitez lancer le projet
  <img width="603" alt="appli" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/c84cf791-526a-45b0-876f-e244e4277498">
 
 - Une fois l'android bien séléctionné cliquer sur **"Run"** au dessus du **void main()**
