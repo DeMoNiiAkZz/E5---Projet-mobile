@@ -30,7 +30,7 @@
  - Vérifier si le service de **WAMP** est demarrer puis se connecter à    **PhpMyAdmin** avec comme identifiant root sans mot de passe 	-> créer    une base nommée **"lcs_mobile"** (cette base de donnée sera la même pour    le dashboard et appli mobile)
  - Insérer le code **SQL** qui se situe dans le projet mobile dans le    répertoire **"SQL"** ce qui donne comme chemin    **"C:\wamp64\www\LCS_mobile\SQL\lcs_mobile.sql"**
  ---
- - Lancer VScode en ouvrant ce répertoire **"C:\wamp64\www\LCS_mobile"** (il faut un peu attendre que sa charge)
+ - Lancer VScode en ouvrant ce répertoire **"C:\wamp64\www\LCS_mobile"** (Attendez un peu que sa charge)
  - Le SDK de flutter est directement dans le projet (ne pas s'inquiéter des erreurs rouges rien n'empêche à l'application de fonctionner) 
  -  Il faut impérativement changer les ip dans les fichiers suivant :
       - **"lib\config.dart"** remplacer toutes les ip **"192.168.56.1"** par la vôtre en saisissant "ipconfig" dans l'invite de commande
