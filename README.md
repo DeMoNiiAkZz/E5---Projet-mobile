@@ -1,6 +1,3 @@
-
-
-
 # Guide de l'installation du projet mobile
 
 
@@ -31,6 +28,7 @@
  - Insérer le code **SQL** qui se situe dans le projet mobile dans le    répertoire **"SQL"** ce qui donne comme chemin    **"C:\wamp64\www\LCS_mobile\SQL\lcs_mobile.sql"**
  ---
  - Lancer VScode en ouvrant ce répertoire **"C:\wamp64\www\LCS_mobile"** (Attendez un peu que sa charge)
+ - Dans le terminal vous devez saisir la commande `flutter pub get`
  - Le SDK de flutter est directement dans le projet (ne pas s'inquiéter des erreurs rouges rien n'empêche à l'application de fonctionner) 
  -  Il faut impérativement changer les ip dans les fichiers suivant :
       - **"lib\config.dart"** remplacer toutes les ip **"192.168.56.1"** par la vôtre en saisissant "ipconfig" dans l'invite de commande
@@ -83,6 +81,3 @@
 
 Bonne découverte de l'application 😉
 En cas de problème, veuillez me contacter via mon adresse e-mail : cailac.enzo@gmail.com
-
-
-	
