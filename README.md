@@ -1,4 +1,4 @@
-# Guide de l'installation du projet mobile
+<img width="893" alt="image" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/b8748e3e-bb55-4ae7-8403-51fec04caf2c"># Guide de l'installation du projet mobile
 
 
 ## Ce projet est réalise avec la technologie Flutter qui permet à partir d'un seul code de faire une application mobile Android et iOS qui communique avec un API PHP
@@ -37,10 +37,18 @@
 <img width="335" alt="sdk flutter dl" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/9bc76314-5e31-4a90-b2bb-9547dcd6b6d9">
 
 Mettez le dans le projet à la racine (pour être sur que sa marche)
+
 <img width="891" alt="clone flutter" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/f823c5c4-bd52-4b80-8dd0-ac7d62476400">
 
 Ensuite cliquer sur "ADD TO PATH"
+
 <img width="344" alt="add to path" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/31d6eda5-f590-4935-b1e7-8b3a22943a48">
+
+Cliquer sur "Locate SDK"
+![Capture d'écran 2024-05-06 103843](https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/213109f1-b596-4937-adb1-820a679822c1)
+
+Puis ouvrer le répertoire "Flutter" à la racine du projet et cliquer sur "Set flutter SDK folder"
+<img width="893" alt="image" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/b9306def-efaa-48e9-943f-acd572240102">
 
 
  -  Il faut impérativement changer les ip dans les fichiers suivant :
