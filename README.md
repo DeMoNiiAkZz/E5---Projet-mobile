@@ -30,7 +30,7 @@
  - Lancer VScode et ouvrer le projet à cette racine **"C:\wamp64\www\LCS_mobile"** (Attendez un peu que sa charge)
  - Dans le terminal vous devez saisir la commande `flutter pub get`
 
-⚠️⚠️⚠️IMPORTANT⚠️⚠️⚠️
+##⚠️⚠️⚠️IMPORTANT⚠️⚠️⚠️
  - Pour installer le SDK, suivez les images suivantes à l'ouverture du projet dans vscode
 
    D'abord cliquer sur "Download SDK"
