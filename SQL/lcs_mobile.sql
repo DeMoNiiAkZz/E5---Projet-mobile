@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 17 avr. 2024 à 11:00
+-- Généré le : lun. 06 mai 2024 à 09:32
 -- Version du serveur : 11.2.2-MariaDB
 -- Version de PHP : 8.2.13
 
@@ -31,22 +31,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateStock` (IN `productId` INT, I
 END$$
 
 DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `avis`
---
-
-DROP TABLE IF EXISTS `avis`;
-CREATE TABLE IF NOT EXISTS `avis` (
-  `id_avis` int(11) NOT NULL AUTO_INCREMENT,
-  `note` int(11) DEFAULT NULL,
-  `commentaire` varchar(500) DEFAULT NULL,
-  `id_intervention` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_avis`),
-  KEY `fk_avis_intervention` (`id_intervention`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -126,11 +110,11 @@ INSERT INTO `conges_payes` (`id_conges_payes`, `motif`, `commentaire`, `date_deb
 (2, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 1),
 (3, 'Vacances', '', '2024-03-18', '2024-03-22', 9, 1),
 (4, 'Vacances', '', '2024-03-04', '2024-03-08', 9, 1),
-(5, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 1),
-(6, 'Maladie', '', '2024-03-18', '2024-03-22', 9, 1),
-(7, 'Vacances', '', '2024-03-04', '2024-03-08', 9, 1),
-(8, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 1),
-(9, 'Maladie', '', '2024-03-18', '2024-03-22', 9, 1);
+(5, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 0),
+(6, 'Maladie', '', '2024-03-18', '2024-03-22', 9, 0),
+(7, 'Vacances', '', '2024-03-04', '2024-03-08', 9, 0),
+(8, 'Vacances', '', '2024-03-11', '2024-03-15', 9, 0),
+(9, 'Maladie', '', '2024-03-18', '2024-03-22', 9, 0);
 
 -- --------------------------------------------------------
 
@@ -241,9 +225,9 @@ CREATE TABLE IF NOT EXISTS `entretien_panne_vehicule` (
 --
 
 INSERT INTO `entretien_panne_vehicule` (`id_entretien`, `type`, `texte`, `date_heure`, `id_vehicule`, `id_technicien`, `traiter`) VALUES
-(1, 'Panne', 'okok', '2024-02-29 11:24:49', 1, 9, 1),
-(2, 'Entretien', 'Manque de liquide de refroidissement', '2024-02-29 15:15:54', 1, 9, 1),
-(3, 'Panne', 'Moteur HS', '2024-02-29 15:16:08', 2, 9, 1);
+(1, 'Panne', 'okok', '2024-02-29 11:24:49', 1, 9, 0),
+(2, 'Entretien', 'Manque de liquide de refroidissement', '2024-02-29 15:15:54', 1, 9, 0),
+(3, 'Panne', 'Moteur HS', '2024-02-29 15:16:08', 2, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -347,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `intervention` (
   `id_client` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_intervention`),
   KEY `fk_intervention_utilisateur` (`id_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `intervention`
@@ -357,7 +341,9 @@ INSERT INTO `intervention` (`id_intervention`, `type`, `date_intervention`, `sta
 (53, 'intervention', '2024-04-15 08:00:00', 'Validée', '01:30:00', 'Intervention de maintenance préventive', 'Fibre optique', 12),
 (54, 'intervention', '2024-04-15 10:00:00', 'En cours', '02:00:00', 'Installation de nouveaux équipements', 'Electricité', 15),
 (55, 'intervention', '2024-04-15 13:00:00', 'A faire', '01:00:00', 'Vérification de la borne de recharge existante', 'Borne de recharge', 12),
-(56, 'intervention', '2024-04-15 16:00:00', 'Reportée', '00:30:00', 'Maintenance corrective sur le système solaire', 'Energie solaire', 15);
+(56, 'intervention', '2024-04-15 16:00:00', 'Reportée', '00:30:00', 'Maintenance corrective sur le système solaire', 'Energie solaire', 15),
+(60, 'intervention', '2024-05-06 11:00:00', 'A faire', '02:00:00', 'test', 'Fibre optique', 12),
+(61, 'intervention', '2024-05-06 14:00:00', 'A faire', '01:00:00', 'Attention éléctrique installation d\'objets électriques ', 'Electricité', 12);
 
 --
 -- Déclencheurs `intervention`
@@ -405,7 +391,15 @@ CREATE TABLE IF NOT EXISTS `intervention_stock` (
   PRIMARY KEY (`id_interventionstock`),
   KEY `fk_intervention_stock_intervention` (`id_intervention`),
   KEY `fk_intervention_stock_stock` (`id_stock`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `intervention_stock`
+--
+
+INSERT INTO `intervention_stock` (`id_interventionstock`, `quantite`, `id_intervention`, `id_stock`) VALUES
+(9, 10, 54, 25),
+(10, 50, 61, 25);
 
 --
 -- Déclencheurs `intervention_stock`
@@ -441,7 +435,7 @@ CREATE TABLE IF NOT EXISTS `intervention_technicien` (
   PRIMARY KEY (`id_intervention_technicien`),
   KEY `fk_intervention_technicien_intervention` (`id_intervention`),
   KEY `fk_intervention_technicien_technicien` (`id_technicien`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `intervention_technicien`
@@ -452,7 +446,9 @@ INSERT INTO `intervention_technicien` (`id_intervention_technicien`, `id_interve
 (54, 54, 9),
 (55, 55, 9),
 (56, 56, 9),
-(59, 59, 9);
+(59, 59, 9),
+(60, 60, 9),
+(61, 61, 9);
 
 -- --------------------------------------------------------
 
@@ -496,7 +492,6 @@ INSERT INTO `log` (`id_log`, `message`, `dateheure`, `id_utilisateur`) VALUES
 (19, 'Connexion réussie', '2024-02-29 09:54:51', 9),
 (20, 'Connexion réussie', '2024-02-29 10:00:54', 9),
 (21, 'Connexion réussie', '2024-02-29 10:18:31', 9),
-(22, 'Kilometrage du véhicule mis à jour', '2024-02-29 10:21:42', NULL),
 (23, 'Connexion réussie', '2024-02-29 10:36:39', 9),
 (24, 'Connexion réussie', '2024-02-29 11:46:05', 9),
 (25, 'Demande de congé', '2024-02-29 14:08:24', 9),
@@ -525,25 +520,6 @@ INSERT INTO `log` (`id_log`, `message`, `dateheure`, `id_utilisateur`) VALUES
 (48, 'Connexion réussie', '2024-03-01 10:51:28', 15),
 (49, 'Connexion réussie', '2024-03-01 10:52:51', 15),
 (50, 'Connexion réussie', '2024-03-01 11:00:24', 15);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `maintenance`
---
-
-DROP TABLE IF EXISTS `maintenance`;
-CREATE TABLE IF NOT EXISTS `maintenance` (
-  `id_maintenance` int(11) NOT NULL AUTO_INCREMENT,
-  `id_vehicule` int(11) DEFAULT NULL,
-  `probleme` varchar(255) DEFAULT NULL,
-  `description` varchar(2000) DEFAULT NULL,
-  `dateheure` datetime DEFAULT NULL,
-  `id_utilisateur` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_maintenance`),
-  KEY `fk_maintenance_vehicule` (`id_vehicule`),
-  KEY `fk_maintenance_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -631,7 +607,15 @@ CREATE TABLE IF NOT EXISTS `signalement` (
   `traiter` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_signalement`),
   KEY `id_technicien` (`id_technicien`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `signalement`
+--
+
+INSERT INTO `signalement` (`id_signalement`, `motif`, `description`, `id_technicien`, `traiter`) VALUES
+(10, 'Oublie', 'J\'ai oublié mon matériel', 9, 0),
+(11, 'Client', 'Le client m\'a frappé dessus ', 9, 0);
 
 -- --------------------------------------------------------
 
@@ -674,7 +658,7 @@ CREATE TABLE IF NOT EXISTS `stock` (
 --
 
 INSERT INTO `stock` (`id_stock`, `reference`, `nom`, `description`, `quantite`) VALUES
-(25, 'REF093895', 'Prise', 'Ceci est une prise de luxe', 100);
+(25, 'REF093895', 'Prise', 'Ceci est une prise de luxe', 40);
 
 -- --------------------------------------------------------
 
@@ -759,12 +743,6 @@ INSERT INTO `vehicule` (`id_vehicule`, `immatriculation`, `marque`, `modele`, `k
 --
 -- Contraintes pour les tables déchargées
 --
-
---
--- Contraintes pour la table `avis`
---
-ALTER TABLE `avis`
-  ADD CONSTRAINT `fk_avis_intervention` FOREIGN KEY (`id_intervention`) REFERENCES `intervention` (`id_intervention`);
 
 --
 -- Contraintes pour la table `communication`
