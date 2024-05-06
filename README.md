@@ -29,7 +29,7 @@
  ---
  - Lancer VScode et ouvrer le projet à cette racine **"C:\wamp64\www\LCS_mobile"** (Attendez un peu que sa charge)
  - Dans le terminal vous devez saisir la commande `flutter pub get`
- - Le SDK de flutter est directement dans le projet (ne pas s'inquiéter des erreurs rouges rien n'empêche à l'application de fonctionner) 
+ - Le SDK de flutter est directement dans le projet, en cas de problème vous aurez une notification en bas à droite dans vscode pour l'installer en cliquant sur "Download SDK" puis vous faites "Locate SDK" et ensuite "ADD to PATH"
  -  Il faut impérativement changer les ip dans les fichiers suivant :
       - **"lib\config.dart"** remplacer toutes les ip **"192.168.56.1"** par la vôtre en saisissant "ipconfig" dans l'invite de commande
       - **"PHP\config.ini"** remplacer aussi toutes les ip **"192.168.56.1"** par le votre à nouveau
