@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import '../config.dart';
 import 'interventionTechnicien.dart';
 import 'demandeTechnicien.dart';
-import 'rappelTechnicien.dart';
 import 'conversationTechnicien.dart';
 import 'package:intl/intl.dart';
 
@@ -123,7 +122,6 @@ class _AccueilTechnicienState extends State<AccueilTechnicien>
         onMessageriePressed: _gotoMessagerieTab,
         refreshInterventionData: _refreshInterventionData,
       ),
-      RappelTab(),
       DemandeTab(
         technicienInfo: _technicienInfo,
         intervention: _interventionInfo,
@@ -262,10 +260,6 @@ class _AccueilTechnicienState extends State<AccueilTechnicien>
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment),
             label: 'Intervention',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notification_important),
-            label: 'Rappel',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
