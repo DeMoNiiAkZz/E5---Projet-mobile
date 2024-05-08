@@ -53,7 +53,8 @@ Puis ouvrer le répertoire "Flutter" à la racine du projet et cliquer sur "Set 
       - **"PHP\config.ini"** remplacer aussi toutes les ip **"192.168.56.1"** par le votre à nouveau
   
 <img width="368" alt="tuto" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/c0a56dc2-3270-456f-be30-46733eea3135">
-<img width="347" alt="configini" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/c8033ee2-84f6-4684-b10e-667e38df7d6e">
+![image](https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/da95c939-0d7c-48d6-b814-7d3fea4bc36c)
+
 
 
 **POUR LANCER LE PROJET** 
