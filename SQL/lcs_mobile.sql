@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : lun. 06 mai 2024 à 09:32
--- Version du serveur : 11.2.2-MariaDB
--- Version de PHP : 8.2.13
+-- Hôte : 127.0.0.1
+-- Généré le : mer. 08 mai 2024 à 15:49
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,7 +25,6 @@ DELIMITER $$
 --
 -- Procédures
 --
-DROP PROCEDURE IF EXISTS `UpdateStock`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateStock` (IN `productId` INT, IN `quantity` INT)   BEGIN
     UPDATE stock SET quantite = quantite - quantity WHERE id_stock = productId;
 END$$
@@ -38,12 +37,10 @@ DELIMITER ;
 -- Structure de la table `citations`
 --
 
-DROP TABLE IF EXISTS `citations`;
-CREATE TABLE IF NOT EXISTS `citations` (
-  `id_citation` int(11) NOT NULL AUTO_INCREMENT,
-  `citation` text NOT NULL,
-  PRIMARY KEY (`id_citation`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `citations` (
+  `id_citation` int(11) NOT NULL,
+  `citation` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `citations`
@@ -61,17 +58,14 @@ INSERT INTO `citations` (`id_citation`, `citation`) VALUES
 -- Structure de la table `communication`
 --
 
-DROP TABLE IF EXISTS `communication`;
-CREATE TABLE IF NOT EXISTS `communication` (
-  `id_communication` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `communication` (
+  `id_communication` int(11) NOT NULL,
   `id_envoyeur` int(11) DEFAULT NULL,
   `type_message` varchar(255) NOT NULL,
   `message` varchar(2000) NOT NULL,
   `datetime` datetime DEFAULT NULL,
-  `id_conversation` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_communication`),
-  KEY `fk_communication_conversation` (`id_conversation`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_conversation` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `communication`
@@ -88,18 +82,15 @@ INSERT INTO `communication` (`id_communication`, `id_envoyeur`, `type_message`, 
 -- Structure de la table `conges_payes`
 --
 
-DROP TABLE IF EXISTS `conges_payes`;
-CREATE TABLE IF NOT EXISTS `conges_payes` (
-  `id_conges_payes` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `conges_payes` (
+  `id_conges_payes` int(11) NOT NULL,
   `motif` varchar(255) NOT NULL,
   `commentaire` text DEFAULT NULL,
   `date_debut` date NOT NULL,
   `date_fin` date NOT NULL,
   `id_technicien` int(11) NOT NULL,
-  `traiter` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id_conges_payes`),
-  KEY `id_technicien` (`id_technicien`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `traiter` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `conges_payes`
@@ -122,15 +113,11 @@ INSERT INTO `conges_payes` (`id_conges_payes`, `motif`, `commentaire`, `date_deb
 -- Structure de la table `conversation`
 --
 
-DROP TABLE IF EXISTS `conversation`;
-CREATE TABLE IF NOT EXISTS `conversation` (
-  `id_conversation` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `conversation` (
+  `id_conversation` int(11) NOT NULL,
   `id_utilisateur1` int(11) DEFAULT NULL,
-  `id_utilisateur2` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_conversation`),
-  KEY `fk_conversation_utilisateur1` (`id_utilisateur1`),
-  KEY `fk_conversation_utilisateur2` (`id_utilisateur2`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_utilisateur2` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `conversation`
@@ -145,19 +132,15 @@ INSERT INTO `conversation` (`id_conversation`, `id_utilisateur1`, `id_utilisateu
 -- Structure de la table `cri`
 --
 
-DROP TABLE IF EXISTS `cri`;
-CREATE TABLE IF NOT EXISTS `cri` (
-  `id_cri` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cri` (
+  `id_cri` int(11) NOT NULL,
   `actions` text DEFAULT NULL,
   `equipements` text DEFAULT NULL,
   `problemes` text DEFAULT NULL,
   `observations` text DEFAULT NULL,
   `id_technicien` int(11) DEFAULT NULL,
-  `id_intervention` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_cri`),
-  KEY `fk_cri_utilisateur` (`id_technicien`),
-  KEY `id_intervention` (`id_intervention`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_intervention` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -165,15 +148,12 @@ CREATE TABLE IF NOT EXISTS `cri` (
 -- Structure de la table `cri_validation`
 --
 
-DROP TABLE IF EXISTS `cri_validation`;
-CREATE TABLE IF NOT EXISTS `cri_validation` (
-  `id_validation_cri` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cri_validation` (
+  `id_validation_cri` int(11) NOT NULL,
   `validation` varchar(255) NOT NULL,
   `commentaire` text DEFAULT NULL,
-  `id_cri` int(11) NOT NULL,
-  PRIMARY KEY (`id_validation_cri`),
-  KEY `id_cri` (`id_cri`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_cri` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -181,17 +161,13 @@ CREATE TABLE IF NOT EXISTS `cri_validation` (
 -- Structure de la table `devis`
 --
 
-DROP TABLE IF EXISTS `devis`;
-CREATE TABLE IF NOT EXISTS `devis` (
-  `id_devis` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `devis` (
+  `id_devis` int(11) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `chemin` varchar(255) DEFAULT NULL,
   `id_utilisateur` int(11) DEFAULT NULL,
-  `id_intervention` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_devis`),
-  KEY `fk_devis_utilisateur` (`id_utilisateur`),
-  KEY `id_intervention` (`id_intervention`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_intervention` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `devis`
@@ -206,19 +182,15 @@ INSERT INTO `devis` (`id_devis`, `nom`, `chemin`, `id_utilisateur`, `id_interven
 -- Structure de la table `entretien_panne_vehicule`
 --
 
-DROP TABLE IF EXISTS `entretien_panne_vehicule`;
-CREATE TABLE IF NOT EXISTS `entretien_panne_vehicule` (
-  `id_entretien` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `entretien_panne_vehicule` (
+  `id_entretien` int(11) NOT NULL,
   `type` varchar(255) DEFAULT NULL,
   `texte` text DEFAULT NULL,
   `date_heure` datetime DEFAULT NULL,
   `id_vehicule` int(11) DEFAULT NULL,
   `id_technicien` int(11) DEFAULT NULL,
-  `traiter` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id_entretien`),
-  KEY `id_vehicule` (`id_vehicule`),
-  KEY `id_technicien` (`id_technicien`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `traiter` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `entretien_panne_vehicule`
@@ -235,17 +207,13 @@ INSERT INTO `entretien_panne_vehicule` (`id_entretien`, `type`, `texte`, `date_h
 -- Structure de la table `facture`
 --
 
-DROP TABLE IF EXISTS `facture`;
-CREATE TABLE IF NOT EXISTS `facture` (
-  `id_facture` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `facture` (
+  `id_facture` int(11) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `chemin` varchar(255) DEFAULT NULL,
   `id_utilisateur` int(11) DEFAULT NULL,
-  `id_intervention` int(11) NOT NULL,
-  PRIMARY KEY (`id_facture`),
-  KEY `fk_facture_utilisateur` (`id_utilisateur`),
-  KEY `id_intervention` (`id_intervention`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_intervention` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `facture`
@@ -260,16 +228,12 @@ INSERT INTO `facture` (`id_facture`, `nom`, `chemin`, `id_utilisateur`, `id_inte
 -- Structure de la table `fiche_technique`
 --
 
-DROP TABLE IF EXISTS `fiche_technique`;
-CREATE TABLE IF NOT EXISTS `fiche_technique` (
-  `id_fiche_technique` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `fiche_technique` (
+  `id_fiche_technique` int(11) NOT NULL,
   `chemin` text NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
-  `id_intervention` int(11) NOT NULL,
-  PRIMARY KEY (`id_fiche_technique`),
-  KEY `id_utilisateur` (`id_utilisateur`),
-  KEY `id_intervention` (`id_intervention`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_intervention` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -277,9 +241,8 @@ CREATE TABLE IF NOT EXISTS `fiche_technique` (
 -- Structure de la table `fichier`
 --
 
-DROP TABLE IF EXISTS `fichier`;
-CREATE TABLE IF NOT EXISTS `fichier` (
-  `id_fichiers` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `fichier` (
+  `id_fichiers` int(11) NOT NULL,
   `chemin` text NOT NULL,
   `nom_affichage` varchar(255) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
@@ -288,16 +251,8 @@ CREATE TABLE IF NOT EXISTS `fichier` (
   `id_maintenance` int(11) DEFAULT NULL,
   `id_vehicule` int(11) DEFAULT NULL,
   `id_sav` int(11) DEFAULT NULL,
-  `id_cri` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_fichiers`),
-  KEY `fk_fichier_intervention` (`id_intervention`),
-  KEY `fk_fichier_maintenance` (`id_maintenance`),
-  KEY `fk_fichier_vehicule` (`id_vehicule`),
-  KEY `fk_fichier_sav` (`id_sav`),
-  KEY `fk_fichier_cri` (`id_cri`),
-  KEY `fk_fichier_user` (`id_user`),
-  KEY `id_stock` (`id_stock`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_cri` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `fichier`
@@ -310,8 +265,7 @@ INSERT INTO `fichier` (`id_fichiers`, `chemin`, `nom_affichage`, `id_user`, `id_
 (12, 'pieces_jointe/technicien/sofie.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (13, 'pieces_jointe/technicien/pierre.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (14, 'pieces_jointe/technicien/paul.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 'pieces_jointe/admin/admin.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(60, 'pieces_jointe/stock/cc-d6-41-7e-ea-f0-f0-2c-e1-58-22-e2-61-45-ba-d4-12-dc-62-70_661faae5e47b8.jpg', NULL, NULL, NULL, 25, NULL, NULL, NULL, NULL);
+(16, 'pieces_jointe/admin/admin.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -319,19 +273,16 @@ INSERT INTO `fichier` (`id_fichiers`, `chemin`, `nom_affichage`, `id_user`, `id_
 -- Structure de la table `intervention`
 --
 
-DROP TABLE IF EXISTS `intervention`;
-CREATE TABLE IF NOT EXISTS `intervention` (
-  `id_intervention` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `intervention` (
+  `id_intervention` int(11) NOT NULL,
   `type` text DEFAULT NULL,
   `date_intervention` datetime DEFAULT NULL,
   `statut` varchar(255) DEFAULT NULL,
   `duree_intervention` time DEFAULT NULL,
   `description` text DEFAULT NULL,
   `categorie` varchar(255) DEFAULT NULL,
-  `id_client` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_intervention`),
-  KEY `fk_intervention_utilisateur` (`id_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_client` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `intervention`
@@ -348,7 +299,6 @@ INSERT INTO `intervention` (`id_intervention`, `type`, `date_intervention`, `sta
 --
 -- Déclencheurs `intervention`
 --
-DROP TRIGGER IF EXISTS `validation_ajout_intervention`;
 DELIMITER $$
 CREATE TRIGGER `validation_ajout_intervention` BEFORE INSERT ON `intervention` FOR EACH ROW BEGIN
     IF DAYOFWEEK(NEW.date_intervention) = 1 THEN
@@ -382,16 +332,12 @@ DELIMITER ;
 -- Structure de la table `intervention_stock`
 --
 
-DROP TABLE IF EXISTS `intervention_stock`;
-CREATE TABLE IF NOT EXISTS `intervention_stock` (
-  `id_interventionstock` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `intervention_stock` (
+  `id_interventionstock` int(11) NOT NULL,
   `quantite` int(11) DEFAULT NULL,
   `id_intervention` int(11) DEFAULT NULL,
-  `id_stock` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_interventionstock`),
-  KEY `fk_intervention_stock_intervention` (`id_intervention`),
-  KEY `fk_intervention_stock_stock` (`id_stock`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_stock` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `intervention_stock`
@@ -404,7 +350,6 @@ INSERT INTO `intervention_stock` (`id_interventionstock`, `quantite`, `id_interv
 --
 -- Déclencheurs `intervention_stock`
 --
-DROP TRIGGER IF EXISTS `verif_insert_stock`;
 DELIMITER $$
 CREATE TRIGGER `verif_insert_stock` BEFORE INSERT ON `intervention_stock` FOR EACH ROW BEGIN
     DECLARE total_quantity INT;
@@ -427,15 +372,11 @@ DELIMITER ;
 -- Structure de la table `intervention_technicien`
 --
 
-DROP TABLE IF EXISTS `intervention_technicien`;
-CREATE TABLE IF NOT EXISTS `intervention_technicien` (
-  `id_intervention_technicien` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `intervention_technicien` (
+  `id_intervention_technicien` int(11) NOT NULL,
   `id_intervention` int(11) NOT NULL,
-  `id_technicien` int(11) NOT NULL,
-  PRIMARY KEY (`id_intervention_technicien`),
-  KEY `fk_intervention_technicien_intervention` (`id_intervention`),
-  KEY `fk_intervention_technicien_technicien` (`id_technicien`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_technicien` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `intervention_technicien`
@@ -456,15 +397,12 @@ INSERT INTO `intervention_technicien` (`id_intervention_technicien`, `id_interve
 -- Structure de la table `log`
 --
 
-DROP TABLE IF EXISTS `log`;
-CREATE TABLE IF NOT EXISTS `log` (
-  `id_log` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `log` (
+  `id_log` int(11) NOT NULL,
   `message` text DEFAULT NULL,
   `dateheure` datetime DEFAULT NULL,
-  `id_utilisateur` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_log`),
-  KEY `fk_log_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_utilisateur` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `log`
@@ -527,17 +465,13 @@ INSERT INTO `log` (`id_log`, `message`, `dateheure`, `id_utilisateur`) VALUES
 -- Structure de la table `plan`
 --
 
-DROP TABLE IF EXISTS `plan`;
-CREATE TABLE IF NOT EXISTS `plan` (
-  `id_plan` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `plan` (
+  `id_plan` int(11) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `chemin` varchar(255) DEFAULT NULL,
   `id_utilisateur` int(11) DEFAULT NULL,
-  `id_intervention` int(11) NOT NULL,
-  PRIMARY KEY (`id_plan`),
-  KEY `fk_plan_utilisateur` (`id_utilisateur`),
-  KEY `id_intervention` (`id_intervention`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_intervention` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `plan`
@@ -552,14 +486,11 @@ INSERT INTO `plan` (`id_plan`, `nom`, `chemin`, `id_utilisateur`, `id_interventi
 -- Structure de la table `qualification`
 --
 
-DROP TABLE IF EXISTS `qualification`;
-CREATE TABLE IF NOT EXISTS `qualification` (
-  `id_qualification` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qualification` (
+  `id_qualification` int(11) NOT NULL,
   `competence` varchar(500) DEFAULT NULL,
-  `id_technicien` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_qualification`),
-  KEY `fk_qualification_utilisateur` (`id_technicien`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_technicien` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -567,14 +498,11 @@ CREATE TABLE IF NOT EXISTS `qualification` (
 -- Structure de la table `rappel`
 --
 
-DROP TABLE IF EXISTS `rappel`;
-CREATE TABLE IF NOT EXISTS `rappel` (
+CREATE TABLE `rappel` (
   `id_rappel` int(11) NOT NULL,
   `contenu` text DEFAULT NULL,
   `dateheure` datetime DEFAULT NULL,
-  `id_utilisateur` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_rappel`),
-  KEY `fk_rappel_utilisateur` (`id_utilisateur`)
+  `id_utilisateur` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -583,13 +511,10 @@ CREATE TABLE IF NOT EXISTS `rappel` (
 -- Structure de la table `sav`
 --
 
-DROP TABLE IF EXISTS `sav`;
-CREATE TABLE IF NOT EXISTS `sav` (
-  `id_sav` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sav` (
+  `id_sav` int(11) NOT NULL,
   `message` text DEFAULT NULL,
-  `id_intervention` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_sav`),
-  KEY `fk_sav_intervention` (`id_intervention`)
+  `id_intervention` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -598,16 +523,13 @@ CREATE TABLE IF NOT EXISTS `sav` (
 -- Structure de la table `signalement`
 --
 
-DROP TABLE IF EXISTS `signalement`;
-CREATE TABLE IF NOT EXISTS `signalement` (
-  `id_signalement` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `signalement` (
+  `id_signalement` int(11) NOT NULL,
   `motif` text NOT NULL,
   `description` text NOT NULL,
   `id_technicien` int(11) NOT NULL,
-  `traiter` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id_signalement`),
-  KEY `id_technicien` (`id_technicien`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `traiter` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `signalement`
@@ -623,19 +545,14 @@ INSERT INTO `signalement` (`id_signalement`, `motif`, `description`, `id_technic
 -- Structure de la table `signature`
 --
 
-DROP TABLE IF EXISTS `signature`;
-CREATE TABLE IF NOT EXISTS `signature` (
-  `id_signature` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `signature` (
+  `id_signature` int(11) NOT NULL,
   `signature_client` text DEFAULT NULL,
   `signature_technicien` text DEFAULT NULL,
   `id_client` int(11) DEFAULT NULL,
   `id_technicien` int(11) DEFAULT NULL,
-  `id_cri` int(11) NOT NULL,
-  PRIMARY KEY (`id_signature`),
-  KEY `id_technicien` (`id_technicien`),
-  KEY `id_cri` (`id_cri`),
-  KEY `id_client` (`id_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_cri` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -643,15 +560,13 @@ CREATE TABLE IF NOT EXISTS `signature` (
 -- Structure de la table `stock`
 --
 
-DROP TABLE IF EXISTS `stock`;
-CREATE TABLE IF NOT EXISTS `stock` (
-  `id_stock` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `stock` (
+  `id_stock` int(11) NOT NULL,
   `reference` varchar(255) DEFAULT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `description` text NOT NULL,
-  `quantite` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_stock`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `quantite` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `stock`
@@ -666,12 +581,10 @@ INSERT INTO `stock` (`id_stock`, `reference`, `nom`, `description`, `quantite`) 
 -- Structure de la table `type`
 --
 
-DROP TABLE IF EXISTS `type`;
-CREATE TABLE IF NOT EXISTS `type` (
-  `id_type` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `type` (
+  `id_type` int(11) NOT NULL,
+  `type` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `type`
@@ -688,9 +601,8 @@ INSERT INTO `type` (`id_type`, `type`) VALUES
 -- Structure de la table `utilisateur`
 --
 
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `utilisateur` (
+  `id_utilisateur` int(11) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `prenom` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -701,10 +613,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `telephone` varchar(255) DEFAULT NULL,
   `id_type` int(11) DEFAULT NULL,
   `id_fichier` int(11) DEFAULT NULL,
-  `est_active` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_utilisateur`),
-  KEY `fk_utilisateur_type` (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `est_active` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -722,15 +632,13 @@ INSERT INTO `utilisateur` (`id_utilisateur`, `nom`, `prenom`, `email`, `password
 -- Structure de la table `vehicule`
 --
 
-DROP TABLE IF EXISTS `vehicule`;
-CREATE TABLE IF NOT EXISTS `vehicule` (
-  `id_vehicule` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `vehicule` (
+  `id_vehicule` int(11) NOT NULL,
   `immatriculation` varchar(20) DEFAULT NULL,
   `marque` varchar(50) DEFAULT NULL,
   `modele` varchar(50) DEFAULT NULL,
-  `kilometrage` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_vehicule`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `kilometrage` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `vehicule`
@@ -739,6 +647,346 @@ CREATE TABLE IF NOT EXISTS `vehicule` (
 INSERT INTO `vehicule` (`id_vehicule`, `immatriculation`, `marque`, `modele`, `kilometrage`) VALUES
 (1, 'AB-123-CD', 'Fiat', '500', 120000),
 (2, 'AZ-000-ZA', 'Porsche', 'GT4', 80000);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `citations`
+--
+ALTER TABLE `citations`
+  ADD PRIMARY KEY (`id_citation`);
+
+--
+-- Index pour la table `communication`
+--
+ALTER TABLE `communication`
+  ADD PRIMARY KEY (`id_communication`),
+  ADD KEY `fk_communication_conversation` (`id_conversation`);
+
+--
+-- Index pour la table `conges_payes`
+--
+ALTER TABLE `conges_payes`
+  ADD PRIMARY KEY (`id_conges_payes`),
+  ADD KEY `id_technicien` (`id_technicien`);
+
+--
+-- Index pour la table `conversation`
+--
+ALTER TABLE `conversation`
+  ADD PRIMARY KEY (`id_conversation`),
+  ADD KEY `fk_conversation_utilisateur1` (`id_utilisateur1`),
+  ADD KEY `fk_conversation_utilisateur2` (`id_utilisateur2`);
+
+--
+-- Index pour la table `cri`
+--
+ALTER TABLE `cri`
+  ADD PRIMARY KEY (`id_cri`),
+  ADD KEY `fk_cri_utilisateur` (`id_technicien`),
+  ADD KEY `id_intervention` (`id_intervention`);
+
+--
+-- Index pour la table `cri_validation`
+--
+ALTER TABLE `cri_validation`
+  ADD PRIMARY KEY (`id_validation_cri`),
+  ADD KEY `id_cri` (`id_cri`);
+
+--
+-- Index pour la table `devis`
+--
+ALTER TABLE `devis`
+  ADD PRIMARY KEY (`id_devis`),
+  ADD KEY `fk_devis_utilisateur` (`id_utilisateur`),
+  ADD KEY `id_intervention` (`id_intervention`);
+
+--
+-- Index pour la table `entretien_panne_vehicule`
+--
+ALTER TABLE `entretien_panne_vehicule`
+  ADD PRIMARY KEY (`id_entretien`),
+  ADD KEY `id_vehicule` (`id_vehicule`),
+  ADD KEY `id_technicien` (`id_technicien`);
+
+--
+-- Index pour la table `facture`
+--
+ALTER TABLE `facture`
+  ADD PRIMARY KEY (`id_facture`),
+  ADD KEY `fk_facture_utilisateur` (`id_utilisateur`),
+  ADD KEY `id_intervention` (`id_intervention`);
+
+--
+-- Index pour la table `fiche_technique`
+--
+ALTER TABLE `fiche_technique`
+  ADD PRIMARY KEY (`id_fiche_technique`),
+  ADD KEY `id_utilisateur` (`id_utilisateur`),
+  ADD KEY `id_intervention` (`id_intervention`);
+
+--
+-- Index pour la table `fichier`
+--
+ALTER TABLE `fichier`
+  ADD PRIMARY KEY (`id_fichiers`),
+  ADD KEY `fk_fichier_intervention` (`id_intervention`),
+  ADD KEY `fk_fichier_maintenance` (`id_maintenance`),
+  ADD KEY `fk_fichier_vehicule` (`id_vehicule`),
+  ADD KEY `fk_fichier_sav` (`id_sav`),
+  ADD KEY `fk_fichier_cri` (`id_cri`),
+  ADD KEY `fk_fichier_user` (`id_user`),
+  ADD KEY `id_stock` (`id_stock`);
+
+--
+-- Index pour la table `intervention`
+--
+ALTER TABLE `intervention`
+  ADD PRIMARY KEY (`id_intervention`),
+  ADD KEY `fk_intervention_utilisateur` (`id_client`);
+
+--
+-- Index pour la table `intervention_stock`
+--
+ALTER TABLE `intervention_stock`
+  ADD PRIMARY KEY (`id_interventionstock`),
+  ADD KEY `fk_intervention_stock_intervention` (`id_intervention`),
+  ADD KEY `fk_intervention_stock_stock` (`id_stock`);
+
+--
+-- Index pour la table `intervention_technicien`
+--
+ALTER TABLE `intervention_technicien`
+  ADD PRIMARY KEY (`id_intervention_technicien`),
+  ADD KEY `fk_intervention_technicien_intervention` (`id_intervention`),
+  ADD KEY `fk_intervention_technicien_technicien` (`id_technicien`);
+
+--
+-- Index pour la table `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id_log`),
+  ADD KEY `fk_log_utilisateur` (`id_utilisateur`);
+
+--
+-- Index pour la table `plan`
+--
+ALTER TABLE `plan`
+  ADD PRIMARY KEY (`id_plan`),
+  ADD KEY `fk_plan_utilisateur` (`id_utilisateur`),
+  ADD KEY `id_intervention` (`id_intervention`);
+
+--
+-- Index pour la table `qualification`
+--
+ALTER TABLE `qualification`
+  ADD PRIMARY KEY (`id_qualification`),
+  ADD KEY `fk_qualification_utilisateur` (`id_technicien`);
+
+--
+-- Index pour la table `rappel`
+--
+ALTER TABLE `rappel`
+  ADD PRIMARY KEY (`id_rappel`),
+  ADD KEY `fk_rappel_utilisateur` (`id_utilisateur`);
+
+--
+-- Index pour la table `sav`
+--
+ALTER TABLE `sav`
+  ADD PRIMARY KEY (`id_sav`),
+  ADD KEY `fk_sav_intervention` (`id_intervention`);
+
+--
+-- Index pour la table `signalement`
+--
+ALTER TABLE `signalement`
+  ADD PRIMARY KEY (`id_signalement`),
+  ADD KEY `id_technicien` (`id_technicien`);
+
+--
+-- Index pour la table `signature`
+--
+ALTER TABLE `signature`
+  ADD PRIMARY KEY (`id_signature`),
+  ADD KEY `id_technicien` (`id_technicien`),
+  ADD KEY `id_cri` (`id_cri`),
+  ADD KEY `id_client` (`id_client`);
+
+--
+-- Index pour la table `stock`
+--
+ALTER TABLE `stock`
+  ADD PRIMARY KEY (`id_stock`);
+
+--
+-- Index pour la table `type`
+--
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`id_type`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`id_utilisateur`),
+  ADD KEY `fk_utilisateur_type` (`id_type`);
+
+--
+-- Index pour la table `vehicule`
+--
+ALTER TABLE `vehicule`
+  ADD PRIMARY KEY (`id_vehicule`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `citations`
+--
+ALTER TABLE `citations`
+  MODIFY `id_citation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `communication`
+--
+ALTER TABLE `communication`
+  MODIFY `id_communication` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT pour la table `conges_payes`
+--
+ALTER TABLE `conges_payes`
+  MODIFY `id_conges_payes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT pour la table `conversation`
+--
+ALTER TABLE `conversation`
+  MODIFY `id_conversation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `cri`
+--
+ALTER TABLE `cri`
+  MODIFY `id_cri` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT pour la table `cri_validation`
+--
+ALTER TABLE `cri_validation`
+  MODIFY `id_validation_cri` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT pour la table `devis`
+--
+ALTER TABLE `devis`
+  MODIFY `id_devis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `entretien_panne_vehicule`
+--
+ALTER TABLE `entretien_panne_vehicule`
+  MODIFY `id_entretien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `facture`
+--
+ALTER TABLE `facture`
+  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `fiche_technique`
+--
+ALTER TABLE `fiche_technique`
+  MODIFY `id_fiche_technique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `fichier`
+--
+ALTER TABLE `fichier`
+  MODIFY `id_fichiers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- AUTO_INCREMENT pour la table `intervention`
+--
+ALTER TABLE `intervention`
+  MODIFY `id_intervention` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT pour la table `intervention_stock`
+--
+ALTER TABLE `intervention_stock`
+  MODIFY `id_interventionstock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `intervention_technicien`
+--
+ALTER TABLE `intervention_technicien`
+  MODIFY `id_intervention_technicien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT pour la table `log`
+--
+ALTER TABLE `log`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+
+--
+-- AUTO_INCREMENT pour la table `plan`
+--
+ALTER TABLE `plan`
+  MODIFY `id_plan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT pour la table `qualification`
+--
+ALTER TABLE `qualification`
+  MODIFY `id_qualification` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `sav`
+--
+ALTER TABLE `sav`
+  MODIFY `id_sav` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `signalement`
+--
+ALTER TABLE `signalement`
+  MODIFY `id_signalement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT pour la table `signature`
+--
+ALTER TABLE `signature`
+  MODIFY `id_signature` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT pour la table `stock`
+--
+ALTER TABLE `stock`
+  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT pour la table `type`
+--
+ALTER TABLE `type`
+  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT pour la table `vehicule`
+--
+ALTER TABLE `vehicule`
+  MODIFY `id_vehicule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
@@ -806,35 +1054,10 @@ ALTER TABLE `fiche_technique`
   ADD CONSTRAINT `fiche_technique_ibfk_2` FOREIGN KEY (`id_intervention`) REFERENCES `intervention` (`id_intervention`);
 
 --
--- Contraintes pour la table `fichier`
---
-ALTER TABLE `fichier`
-  ADD CONSTRAINT `fichier_ibfk_1` FOREIGN KEY (`id_stock`) REFERENCES `stock` (`id_stock`),
-  ADD CONSTRAINT `fk_fichier_cri` FOREIGN KEY (`id_cri`) REFERENCES `cri` (`id_cri`),
-  ADD CONSTRAINT `fk_fichier_intervention` FOREIGN KEY (`id_intervention`) REFERENCES `intervention` (`id_intervention`),
-  ADD CONSTRAINT `fk_fichier_maintenance` FOREIGN KEY (`id_maintenance`) REFERENCES `maintenance` (`id_maintenance`),
-  ADD CONSTRAINT `fk_fichier_sav` FOREIGN KEY (`id_sav`) REFERENCES `sav` (`id_sav`),
-  ADD CONSTRAINT `fk_fichier_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_utilisateur`),
-  ADD CONSTRAINT `fk_fichier_vehicule` FOREIGN KEY (`id_vehicule`) REFERENCES `vehicule` (`id_vehicule`);
-
---
 -- Contraintes pour la table `intervention`
 --
 ALTER TABLE `intervention`
   ADD CONSTRAINT `fk_intervention_utilisateur` FOREIGN KEY (`id_client`) REFERENCES `utilisateur` (`id_utilisateur`);
-
---
--- Contraintes pour la table `intervention_stock`
---
-ALTER TABLE `intervention_stock`
-  ADD CONSTRAINT `fk_intervention_stock_intervention` FOREIGN KEY (`id_intervention`) REFERENCES `intervention` (`id_intervention`),
-  ADD CONSTRAINT `fk_intervention_stock_stock` FOREIGN KEY (`id_stock`) REFERENCES `stock` (`id_stock`);
-
---
--- Contraintes pour la table `signalement`
---
-ALTER TABLE `signalement`
-  ADD CONSTRAINT `signalement_ibfk_1` FOREIGN KEY (`id_technicien`) REFERENCES `utilisateur` (`id_utilisateur`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

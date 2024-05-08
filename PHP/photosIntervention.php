@@ -51,7 +51,7 @@ switch ($request_method) {
             $fileName = 'photoIntervention_' . $interventionId . '_' . uniqid() . '.jpg';
             $imagePaths[] = 'pieces_jointe/intervention/' . $fileName;
 
-            $directory = $config['path'].$config['addPathPhotos'];
+            $directory = $config['path'].$config['interventionPhotos'];
             $filePath = $directory . $fileName;
             file_put_contents($filePath, $image);
         }
