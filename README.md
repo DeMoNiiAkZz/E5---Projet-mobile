@@ -1,6 +1,3 @@
-<img width="893" alt="image" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/b8748e3e-bb55-4ae7-8403-51fec04caf2c"># Guide de l'installation du projet mobile
-
-
 ## Ce projet est réalise avec la technologie Flutter qui permet à partir d'un seul code de faire une application mobile Android et iOS qui communique avec un API PHP
 
 - Projet mobile : https://github.com/DeMoNiiAkZz/E5---Projet-mobile
