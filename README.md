@@ -1,6 +1,3 @@
-<img width="893" alt="image" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/b8748e3e-bb55-4ae7-8403-51fec04caf2c"># Guide de l'installation du projet mobile
-
-
 ## Ce projet est réalise avec la technologie Flutter qui permet à partir d'un seul code de faire une application mobile Android et iOS qui communique avec un API PHP
 
 - Projet mobile : https://github.com/DeMoNiiAkZz/E5---Projet-mobile
@@ -56,8 +53,8 @@ Puis ouvrer le répertoire "Flutter" à la racine du projet et cliquer sur "Set 
       - **"PHP\config.ini"** remplacer aussi toutes les ip **"192.168.56.1"** par le votre à nouveau
   
 <img width="368" alt="tuto" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/c0a56dc2-3270-456f-be30-46733eea3135">
-<img width="347" alt="configini" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/c8033ee2-84f6-4684-b10e-667e38df7d6e">
 
+<img width="368" alt="tuto" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/03d03937-6749-43e0-bf11-cdcdb010ee11">
 
 **POUR LANCER LE PROJET** 
 
