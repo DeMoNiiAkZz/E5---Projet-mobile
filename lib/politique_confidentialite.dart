@@ -20,7 +20,7 @@ class PrivacyPolicyPage extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
-            Text('Dernière mise à jour : [Date]'),
+            Text('Dernière mise à jour : 21/02/2024'),
             SizedBox(height: 20),
             _buildSectionTitle('1. Introduction'),
             _buildSectionContent(
@@ -57,7 +57,7 @@ class PrivacyPolicyPage extends StatelessWidget {
                 '• Suppression de vos données\n'
                 '• Opposition à l\'utilisation de vos données\n'
                 '• Portabilité de vos données\n\n'
-                'Pour exercer ces droits, veuillez nous contacter à [adresse e-mail de contact].'),
+                'Pour exercer ces droits, veuillez nous contacter à contact@logconnectservices.com.'),
             _buildSectionTitle('7. Modifications de la politique de confidentialité'),
             _buildSectionContent(
                 'Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. '
@@ -65,9 +65,9 @@ class PrivacyPolicyPage extends StatelessWidget {
             _buildSectionTitle('8. Contact'),
             _buildSectionContent(
                 'Si vous avez des questions ou des préoccupations concernant cette politique de confidentialité, veuillez nous contacter à :\n\n'
-                '[Nom de l\'entreprise]\n'
-                '[Adresse de l\'entreprise]\n'
-                '[Adresse e-mail de contact]'),
+                'Log Connect Services\n'
+                '17 bis Rue André Maginot, 55800, Revigny-sur-Ornain\n'
+                'contact@logconnectservices.com'),
           ],
         ),
       ),
