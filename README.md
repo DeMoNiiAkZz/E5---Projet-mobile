@@ -25,7 +25,7 @@
  - Insérer le code **SQL** qui se situe dans le projet mobile dans le    répertoire **"SQL"** ce qui donne comme chemin    **"C:\wamp64\www\LCS_mobile\SQL\lcs_mobile.sql"**
  ---
  - Lancer VScode et ouvrer le projet à cette racine **"C:\wamp64\www\LCS_mobile"** (Attendez un peu que sa charge)
- - Dans le terminal vous devez saisir la commande `flutter pub get`
+ 
 
 ## ⚠️⚠️⚠️IMPORTANT⚠️⚠️⚠️
  - Pour installer le SDK, suivez les images suivantes à l'ouverture du projet dans vscode
@@ -47,6 +47,7 @@ Cliquer sur "Locate SDK"
 Puis ouvrer le répertoire "Flutter" à la racine du projet et cliquer sur "Set flutter SDK folder"
 <img width="893" alt="image" src="https://github.com/DeMoNiiAkZz/E5---Projet-mobile/assets/116117908/b9306def-efaa-48e9-943f-acd572240102">
 
+- Dans le terminal vous devez saisir la commande `flutter pub get` une fois le sdk mit en place (cela retirera toutes les erreurs rouges)
 
  -  Il faut impérativement changer les ip dans les fichiers suivant :
       - **"lib\config.dart"** remplacer toutes les ip **"192.168.56.1"** par la vôtre en saisissant "ipconfig" dans l'invite de commande
