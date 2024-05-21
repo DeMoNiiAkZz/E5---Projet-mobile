@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'config.dart';
 import 'technicien/accueilTechnicien.dart';
+import 'politique_confidentialite.dart';
 
 class ConnexionPage extends StatefulWidget {
   @override
@@ -108,8 +109,6 @@ class _ConnexionPageState extends State<ConnexionPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        'Chemin de l\'image : http://${AppConfig.chemin}pieces_jointe/ico_mobile/logconnectservices.png');
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -172,9 +171,12 @@ class _ConnexionPageState extends State<ConnexionPage> {
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/inscription');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PrivacyPolicyPage()),
+                    );
                   },
-                  child: Text("Première connexion ?"),
+                  child: Text("Voir la politique de confidentialité"),
                 ),
               ],
             ),

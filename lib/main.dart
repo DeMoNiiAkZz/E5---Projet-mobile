@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'connexion.dart';
-import 'inscription.dart';
 import 'package:intl/date_symbol_data_local.dart'; 
 
 void main() async {
@@ -24,7 +23,6 @@ class Menu extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => ConnexionPage(),
-        '/inscription': (context) => InscriptionPage(),
       },
     );
   }
